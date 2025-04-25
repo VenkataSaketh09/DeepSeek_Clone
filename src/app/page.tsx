@@ -4,6 +4,7 @@ import menuIcon from "./assets/menu_icon.svg";
 import chatIcon from "./assets/chat_icon.svg";
 import logoIcon from "./assets/logo_icon.svg";
 import { useState } from "react";
+import Sidebar from "./components/Sidebar";
 export default function Home() {
   const [expand, setExpand] = useState(false);
   const [messages,setMessages]=useState("");
@@ -11,6 +12,7 @@ export default function Home() {
     <div>
       <div className="flex h-screen">
         {/* sidebar nav */}
+        <Sidebar expand={expand} setExpand={setExpand}/>
         <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8 bg-[#292a2d] text-white relative">
           <div className="md:hidden absolute px-4 top-6 flex items-center justify-between w-full">
             <Image onClick={()=>expand ? setExpand(false) : setExpand(true)}
