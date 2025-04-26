@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logoText from "../assets/logo_text.svg";
 import logoIcon from "../assets/logo_icon.svg";
 import menuIcon from "../assets/menu_icon.svg";
@@ -14,6 +14,7 @@ import profileIcon from "../assets/profile_icon.svg";
 import Image from "next/image";
 import { useClerk,UserButton, useUser } from "@clerk/nextjs";
 import { useAppContext } from "../context/AppContext";
+import ChatLabel from "./ChatLabel";
 interface sidebarProps {
   expand: boolean;
   setExpand: (value: boolean) => void;
@@ -21,6 +22,7 @@ interface sidebarProps {
 function Sidebar({ expand, setExpand }: sidebarProps) {
   const {openSignIn} = useClerk();
   const {isLoaded,user} = useAppContext();
+  const [openMenu,setOpenMenu]=useState({id:0,open:false});
   return (
     <div
       className={`flex flex-col justify-between bg-[#212327] pt-7 transition-all z-50 max-md:absolute max-md:h-screen ${
@@ -89,6 +91,7 @@ function Sidebar({ expand, setExpand }: sidebarProps) {
         >
           <p className="my-1">Recents</p>
           {/* chat label */}
+          <ChatLabel openMenu={openMenu} setOpenMenu={setOpenMenu}/>
         </div>
       </div>
       <div>

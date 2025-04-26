@@ -6,6 +6,7 @@ import logoIcon from "./assets/logo_icon.svg";
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Promptbox from "./components/Promptbox";
+import Message from "./components/Message";
 export default function Home() {
   const [expand, setExpand] = useState(false);
   const [messages,setMessages]=useState("");
@@ -36,7 +37,7 @@ export default function Home() {
             ) :
             (
               <div>
-
+                <Message role='user' content='What is Next JS'/>
               </div>
             )
           }
