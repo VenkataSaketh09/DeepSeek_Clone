@@ -12,12 +12,15 @@ import qrCode from "../assets/qrcode.png";
 import newIcon from "../assets/new_icon.svg";
 import profileIcon from "../assets/profile_icon.svg";
 import Image from "next/image";
-
+import { useClerk,UserButton, useUser } from "@clerk/nextjs";
+import { useAppContext } from "../context/AppContext";
 interface sidebarProps {
   expand: boolean;
   setExpand: (value: boolean) => void;
 }
 function Sidebar({ expand, setExpand }: sidebarProps) {
+  const {openSignIn} = useClerk();
+  const {isLoaded,user} = useAppContext();
   return (
     <div
       className={`flex flex-col justify-between bg-[#212327] pt-7 transition-all z-50 max-md:absolute max-md:h-screen ${
@@ -113,8 +116,12 @@ function Sidebar({ expand, setExpand }: sidebarProps) {
           </>
         )}
         </div>
-        <div className={`flex items ${expand ? 'hover:bg-white/10 rounded-lg':'justify-center w-full'} gap-3 text-white/60 text-sm p-2 mt-2 cursor-pointer`}>
-            <Image src={profileIcon} alt='' className="w-7"/>
+        <div  onClick={() => {
+  if (isLoaded && !user) openSignIn()}}
+        className={`flex items ${expand ? 'hover:bg-white/10 rounded-lg':'justify-center w-full'} gap-3 text-white/60 text-sm p-2 mt-2 cursor-pointer`}>
+          {
+            user?<UserButton/>:<Image src={profileIcon} alt='' className="w-7"/>
+          }
             {expand && <span>My profile</span>}
         </div>
         

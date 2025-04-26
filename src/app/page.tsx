@@ -5,9 +5,11 @@ import chatIcon from "./assets/chat_icon.svg";
 import logoIcon from "./assets/logo_icon.svg";
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
+import Promptbox from "./components/Promptbox";
 export default function Home() {
   const [expand, setExpand] = useState(false);
   const [messages,setMessages]=useState("");
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div>
       <div className="flex h-screen">
@@ -39,6 +41,7 @@ export default function Home() {
             )
           }
           {/* prompt Box */}
+          <Promptbox isLoading={isLoading} setIsLoading={setIsLoading}/>
           <p className="text-xs absolute bottom-1 text-gray-500">AI-generated, for Reference only</p>
         </div>
       </div>
