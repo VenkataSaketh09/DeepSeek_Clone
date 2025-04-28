@@ -10,6 +10,7 @@ export async function POST(req:any){
     const headerPayLoad=await headers();
     const svixHeaders={
         'svix-id':headerPayLoad.get('svix-id') || '',
+        'svix-timestamp':headerPayLoad.get('svix-timestamp') || '',
         'svix-signature':headerPayLoad.get('svix-signature') || '',
     };
     //get the payload and verify it
